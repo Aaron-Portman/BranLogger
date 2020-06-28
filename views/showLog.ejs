@@ -1,0 +1,30 @@
+<% workouts.forEach(workout => { %>
+    <div>
+        Workouts:
+
+        <%=workout.workout%>
+        <%=workout.year%>
+        <%=workout.month%>
+        <%=workout.day%>
+        <%=workout.dayOfWeek%>
+        <%=workout.grade%>
+        <%=workout.notes%>
+
+    </div>
+<% }); %>
+
+<% easyruns.forEach(run => { %>
+    <div>
+        <h1>Easy Runs:</h1>
+        <h3>Distance: <%=run.mileage%> miles</h3>
+        <h3> Time: <%=run.minutes%>:<%=run.seconds%> </h3>
+        <h3>Pace: <%= run.avgTime %></h3>
+        <!-- <%=run.year%>
+        <%=run.month%>
+        <%=run.day%>
+        <%=run.dayOfWeek%>
+        <%=run.grade%>
+        <%=run.notes%> -->
+
+    </div>
+<% }); %>

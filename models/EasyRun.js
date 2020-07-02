@@ -17,6 +17,7 @@ const easyRunSchema = Schema( {
     seconds: String,
     grade: String,
     notes: String,
+    gradeColor: String,
 });
 
 module.exports = mongoose.model('EasyRun', easyRunSchema)

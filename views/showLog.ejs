@@ -1,5 +1,5 @@
 <% workouts.forEach(workout => { %>
-    <div>
+    <div style="background-color: <%= workout.gradeColor %>">
         Workouts:
 
         <%=workout.workout%>
@@ -14,11 +14,12 @@
 <% }); %>
 
 <% easyruns.forEach(run => { %>
-    <div>
+    <div style="background-color: <%= run.gradeColor %>">
         <h1>Easy Runs:</h1>
         <h3>Distance: <%=run.mileage%> miles</h3>
         <h3> Time: <%=run.minutes%>:<%=run.seconds%> </h3>
         <h3>Pace: <%= run.avgTime %></h3>
+        <h3>Comments: <%= run.notes %></h3>
         <!-- <%=run.year%>
         <%=run.month%>
         <%=run.day%>

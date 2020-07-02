@@ -13,6 +13,7 @@ const workoutSchema = Schema( {
     workout: String,
     grade: String,
     notes: String,
+    gradeColor: String,
 });
 
 module.exports = mongoose.model('Workout', workoutSchema)

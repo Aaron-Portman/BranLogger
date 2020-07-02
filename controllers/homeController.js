@@ -6,7 +6,6 @@ const User = require("../models/User")
 exports.homeScreen = async (req, res, next) => {
     try{
         res.locals.teamMembers = await User.find()
-        console.log(res.locals.teamMembers)
         res.render("home")
     } catch(e){
         next(e)
@@ -43,6 +42,24 @@ exports.postedEasyRunForm = async (req,res) => {
             avgSeconds = "0" + avgSeconds
         }
 
+        let grade = req.body.grade
+        let gradeColor
+        if(grade == "Excellent"){
+            gradeColor = "#309143"
+        } else if(grade == "Very Good"){
+            gradeColor = "#51b364"
+        } else if(grade == "Good"){
+            gradeColor = "#8ace7e"
+        } else if(grade == "Neutral"){
+            gradeColor = "#ffda66"
+        } else if(grade == "Not Good"){
+            gradeColor = "#f0bd27"
+        } else if(grade == "Very Bad"){
+            gradeColor = "#e03531"
+        } else if(grade == "Terrible"){
+            gradeColor = "#b60a1c"
+        }
+ 
         let avgTime = avgMinutes + ":" + avgSeconds
         console.log("seconds: " + seconds)
         let newEasyRun = new EasyRun({
@@ -55,8 +72,14 @@ exports.postedEasyRunForm = async (req,res) => {
             dayOfWeek: d.getDay(),
             mileage: req.body.mileage,
             notes: req.body.notes,
-            grade: req.body.grade,
+            grade,
+            gradeColor,
+            user: req.body.userId,
+            
         })
+        console.log(req.body.userId)
+
+        console.log("new easy run here " + newEasyRun)
         
         await newEasyRun.save().then((run) => {
             let id = run._id
@@ -69,6 +92,23 @@ exports.postedEasyRunForm = async (req,res) => {
 }
 
 exports.postedWorkoutForm = async (req,res) => {
+    let grade = req.body.grade
+    let gradeColor
+    if(grade == "Excellent"){
+        gradeColor = "#309143"
+    } else if(grade == "Very Good"){
+        gradeColor = "#51b364"
+    } else if(grade == "Good"){
+        gradeColor = "#8ace7e"
+    } else if(grade == "Neutral"){
+        gradeColor = "#ffda66"
+    } else if(grade == "Not Good"){
+        gradeColor = "#f0bd27"
+    } else if(grade == "Very Bad"){
+        gradeColor = "#e03531"
+    } else if(grade == "Terrible"){
+        gradeColor = "#b60a1c"
+    }
     try{
         let d = new Date(req.body.date)
         let newWorkout = new Workout({
@@ -78,7 +118,8 @@ exports.postedWorkoutForm = async (req,res) => {
             dayOfWeek: d.getDay(),
             workout: req.body.workout,
             notes: req.body.notes,
-            grade: req.body.grade,
+            grade,
+            gradeColor,
         })
         
         await newWorkout.save().then((workout) => {
@@ -95,6 +136,7 @@ exports.showLog = async (req,res) => {
     try{
         res.locals.workouts = await Workout.find({userId: req.id})
         res.locals.easyruns = await EasyRun.find({userId: req.id})
+        console.log(res.locals.easyruns )
         res.render("showLog")
     } catch(e){
         console.log(e)

@@ -8,6 +8,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 //var userSchema = mongoose.Schema( {any:{}})
 
 var userSchema = Schema( {
+  userId: ObjectId,
   googleid: String,
   googletoken: String,
   googlename:String,

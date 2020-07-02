@@ -2,6 +2,7 @@
 const EasyRun = require("../models/EasyRun")
 const Workout = require("../models/Workout")
 const User = require("../models/User")
+const CrossTrain = require("../models/CrossTrain")
 
 exports.homeScreen = async (req, res, next) => {
     try{
@@ -17,6 +18,53 @@ exports.easyRunPage = (req, res) => {
 exports.workoutPage = (req, res) => {
     res.render("workout")
 }
+exports.crossTrainPage = (req, res) => {
+    res.render("crossTrain")
+}
+
+exports.postedCrossTrainForm = async (req,res) => {
+    let grade = req.body.grade
+    let gradeColor
+    if(grade == "Excellent"){
+        gradeColor = "#309143"
+    } else if(grade == "Very Good"){
+        gradeColor = "#51b364"
+    } else if(grade == "Good"){
+        gradeColor = "#8ace7e"
+    } else if(grade == "Neutral"){
+        gradeColor = "#ffda66"
+    } else if(grade == "Not Good"){
+        gradeColor = "#f0bd27"
+    } else if(grade == "Very Bad"){
+        gradeColor = "#e03531"
+    } else if(grade == "Terrible"){
+        gradeColor = "#b60a1c"
+    }
+    try{
+        let d = new Date(req.body.date)
+        let newCrossTrain = new CrossTrain({
+            year: d.getFullYear(),
+            month: d.getMonth(),
+            day: d.getDate(),
+            dayOfWeek: d.getDay(),
+            workout: req.body.workout,
+            time: req.body.time,
+            notes: req.body.notes,
+            grade,
+            gradeColor,
+        })
+        console.log(newCrossTrain.time)
+        await newCrossTrain.save().then((crossTrain) => {
+            let id = crossTrain._id
+            console.log(crossTrain)
+            res.redirect("/showLog/" + id)
+        })
+    } catch(e){
+        console.log(e)
+    }
+}
+
+
 exports.postedEasyRunForm = async (req,res) => {
 
     
@@ -136,7 +184,7 @@ exports.showLog = async (req,res) => {
     try{
         res.locals.workouts = await Workout.find({userId: req.id})
         res.locals.easyruns = await EasyRun.find({userId: req.id})
-        console.log(res.locals.easyruns )
+        res.locals.crosstrains = await CrossTrain.find({userId: req.id})
         res.render("showLog")
     } catch(e){
         console.log(e)

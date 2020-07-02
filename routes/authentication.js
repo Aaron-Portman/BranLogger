@@ -18,7 +18,7 @@ const configPassport = require('../config/passport')
 configPassport(passport)
 
 router.use(session(
-  {secret: 'zzbbyananaresasd4322',
+  {secret: 'KuasxmXqxD_iWkj1YGLt7eGh',
    resave: false,
    saveUninitialized: false,
    cookie:{maxAge:24*60*60*1000}, // allow login for one day...
@@ -34,7 +34,6 @@ const approvedLogins = ["tjhickey@brandeis.edu", "tjhickey724@gmail.com","csjbs2
 
 // here is where we check on their logged in status
 router.use((req,res,next) => {
-  res.locals.title="Authentication Demo"
   res.locals.loggedIn = false
   if (req.isAuthenticated()){
       res.locals.user = req.user

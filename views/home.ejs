@@ -1,1 +1,8 @@
 <h2>Team News</h2>
+<h4></h4>
+<div id="logList">
+    <h3>Logs</h3>
+    <% teamMembers.forEach(member =>{ %>
+        <a href="/showLog/:<%=member._id%>"> <%= member.googlename %> (<%= member.googleemail %>) </a><br>
+    <%})%>
+</div>

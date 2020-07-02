@@ -1,9 +1,16 @@
 "use strict";
 const EasyRun = require("../models/EasyRun")
 const Workout = require("../models/Workout")
+const User = require("../models/User")
 
-exports.homeScreen = (req, res) => {
-    res.render("home")
+exports.homeScreen = async (req, res, next) => {
+    try{
+        res.locals.teamMembers = await User.find()
+        console.log(res.locals.teamMembers)
+        res.render("home")
+    } catch(e){
+        next(e)
+    }
 }
 exports.easyRunPage = (req, res) => {
     res.render("easyRun")

@@ -6,11 +6,20 @@
     <title style="color: black;">BranLogger 1.0</title>
 </head>
 <body>
-<div class="jumbotron" style="background-color: rgb(35,65,155,.8); padding: 2%">
-    <h1 style="color: black;">Bran Logger! <a href="/login" style=" color:black; font-size:30%; float: right;">Login</a></h1>
+  <div class="jumbotron" style="background-color: rgb(35,65,155,.8); padding: 2%;">
+    <h1 id="mainJumbo" style="color: black;">Bran Logger! 
+      <% if (!loggedIn) { %>
+        <a href="/login" style=" color:black; font-size:30%; float: right;">Login</a>
+      <% } else { %>
+        <a href="/logout" style=" color:black; font-size:30%; float: right;padding-left: 2%;">Logout</a>
+        <p style=" color:black; font-size:30%; float: right;"><%=user.googleemail%></p>
+      <% } %>
+      <!-- <img src= "https://i.turner.ncaa.com/sites/default/files/images/logos/schools/bgd/brandeis.svg"style="float:right"> -->
+    </h1>
     <h3 class ="lead" style="font-weight: lighter; color:black">A personalized logger for the Brandeis Men's and Women's Distance Team!</h3>
     
   </div>
+
 
 <div id="nav">
     <ul class="nav nav-tabs">

@@ -8,12 +8,10 @@ exports.homeScreen = async (req, res, next) => {
     try{
         console.log(req.user)
         if(req.user !== undefined && req.user !== null) {
-            console.log("made it in")
             res.locals.teamMembers = await User.find()
-            console.log("goingto render home")
+            console.log(JSON.stringify(res.locals.teamMembers))
             res.render("home")
         } else {
-            console.log("going to render login")
             res.render("login")
         }
     } catch(e) {
@@ -184,13 +182,10 @@ exports.postedWorkoutForm = async (req,res) => {
 
 }
 exports.showLog = async (req,res) => {
-    console.log("req.user._id=", req.user._id)
     try{
-        console.log("req.user._id=", req.user._id)
-
-        res.locals.workouts = await Workout.find({userId: req.user._id})
-        res.locals.easyruns = await EasyRun.find({userId: req.user._id})
-        res.locals.crosstrains = await CrossTrain.find({userId: req.user._id})
+        res.locals.workouts = await Workout.find({userId: req.params.id})
+        res.locals.easyruns = await EasyRun.find({userId: req.params.id})
+        res.locals.crosstrains = await CrossTrain.find({userId: req.params.id})
         res.render("showLog")
     } catch(e){
         console.log(e)

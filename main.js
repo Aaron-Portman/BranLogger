@@ -43,7 +43,6 @@ app.post("/addCrossTrain", homeController.postedCrossTrainForm)
 app.get("/easyRun", homeController.easyRunPage)
 app.get("/workout", homeController.workoutPage)
 app.get("/crossTrain", homeController.crossTrainPage)
-//app.get("/log", homeController.logPage)
 app.get("/showLog/:id", homeController.showLog)
 
 /*

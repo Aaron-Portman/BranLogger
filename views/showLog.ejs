@@ -10,7 +10,7 @@
 </html>
 <h1>Workouts:</h1>
 <% workouts.forEach(workout => { %>
-    <div style="background-color: <%= workout.gradeColor %>; padding:3%; margin-top:10px">
+    <div style="background-color: <%= workout.gradeColor %>; padding:3%; margin:10px">
         
 
         <%=workout.workout%>
@@ -25,7 +25,7 @@
 <% }); %>
 <h1>Easy Runs:</h1>
 <% easyruns.forEach(run => { %>
-    <div style="background-color: <%= run.gradeColor %>; padding:3%; margin-top:10px">
+    <div style="background-color: <%= run.gradeColor %>; padding:3%; margin:10px">
         
         <h3>Distance: <%=run.mileage%> miles</h3>
         <h3> Time: <%=run.minutes%>:<%=run.seconds%> </h3>
@@ -42,7 +42,7 @@
 <% }); %>
 <h2>Cross Trains:</h2>
 <% crosstrains.forEach(crossTrain => { %>
-    <div style="background-color: <%= crossTrain.gradeColor %>; padding:3%; margin-top:10px">
+    <div style="background-color: <%= crossTrain.gradeColor %>; padding:3%; margin:10px">
         <h3><%=crossTrain.workout %></h3>
         <h3><%=crossTrain.time %></h3>
         <h3><%=crossTrain.notes %></h3>

@@ -6,9 +6,17 @@ const CrossTrain = require("../models/CrossTrain")
 
 exports.homeScreen = async (req, res, next) => {
     try{
-        res.locals.teamMembers = await User.find()
-        res.render("home")
-    } catch(e){
+        console.log(req.user)
+        if(req.user !== undefined && req.user !== null) {
+            console.log("made it in")
+            res.locals.teamMembers = await User.find()
+            console.log("goingto render home")
+            res.render("home")
+        } else {
+            console.log("going to render login")
+            res.render("login")
+        }
+    } catch(e) {
         next(e)
     }
 }
@@ -53,7 +61,6 @@ exports.postedCrossTrainForm = async (req,res) => {
             grade,
             gradeColor,
         })
-        console.log(newCrossTrain.time)
         await newCrossTrain.save().then((crossTrain) => {
             let id = crossTrain._id
             console.log(crossTrain)
@@ -109,7 +116,6 @@ exports.postedEasyRunForm = async (req,res) => {
         }
  
         let avgTime = avgMinutes + ":" + avgSeconds
-        console.log("seconds: " + seconds)
         let newEasyRun = new EasyRun({
             avgTime,
             minutes,
@@ -124,11 +130,7 @@ exports.postedEasyRunForm = async (req,res) => {
             gradeColor,
             user: req.body.userId,
             
-        })
-        console.log(req.body.userId)
-
-        console.log("new easy run here " + newEasyRun)
-        
+        })        
         await newEasyRun.save().then((run) => {
             let id = run._id
             console.log(run)
@@ -160,6 +162,7 @@ exports.postedWorkoutForm = async (req,res) => {
     try{
         let d = new Date(req.body.date)
         let newWorkout = new Workout({
+            userId: req.user._id,
             year: d.getFullYear(),
             month: d.getMonth(),
             day: d.getDate(),
@@ -173,7 +176,7 @@ exports.postedWorkoutForm = async (req,res) => {
         await newWorkout.save().then((workout) => {
             let id = workout._id
             console.log(workout)
-            res.redirect("/showLog/" + id)
+            res.redirect("/showLog/" + req.user._id)
         })
     } catch(e){
         console.log(e)
@@ -181,10 +184,13 @@ exports.postedWorkoutForm = async (req,res) => {
 
 }
 exports.showLog = async (req,res) => {
+    console.log("req.user._id=", req.user._id)
     try{
-        res.locals.workouts = await Workout.find({userId: req.id})
-        res.locals.easyruns = await EasyRun.find({userId: req.id})
-        res.locals.crosstrains = await CrossTrain.find({userId: req.id})
+        console.log("req.user._id=", req.user._id)
+
+        res.locals.workouts = await Workout.find({userId: req.user._id})
+        res.locals.easyruns = await EasyRun.find({userId: req.user._id})
+        res.locals.crosstrains = await CrossTrain.find({userId: req.user._id})
         res.render("showLog")
     } catch(e){
         console.log(e)

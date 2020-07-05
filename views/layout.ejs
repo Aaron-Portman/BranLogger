@@ -8,9 +8,7 @@
 <body>
   <div class="jumbotron" style="background-color: rgb(35,65,155,.8); padding: 2%;">
     <h1 id="mainJumbo" style="color: black;">Bran Logger! 
-      <% if (!loggedIn) { %>
-        <a href="/login" style=" color:black; font-size:30%; float: right;">Login</a>
-      <% } else { %>
+      <% if (loggedIn) { %>
         <a href="/logout" style=" color:black; font-size:30%; float: right;padding-left: 2%;">Logout</a>
         <p style=" color:black; font-size:30%; float: right;"><%=user.googleemail%></p>
       <% } %>
@@ -19,18 +17,19 @@
     <h3 class ="lead" style="font-weight: lighter; color:black">A personalized logger for the Brandeis Men's and Women's Distance Team!</h3>
     
   </div>
-
-
+<% if (loggedIn) { %>
 <div id="nav">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="/">Home</a>
       </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="/log">Log</a>
+          
+          <a class="nav-link" data-toggle="tab" href="/showLog/<%= user._id %>">Log</a>
+          
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="/easyRun">Enter Easy Run</a>
+          <a class="nav-link" data-toggle="tab" href="/easyRun">Enter Easy/Long Run</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="/workout">Enter Workout</a>
@@ -40,7 +39,11 @@
         </li>
       </ul>
 </div>
-
+<% } %>
 <%- body %>
+
+
+
+
 </body>
 </html>

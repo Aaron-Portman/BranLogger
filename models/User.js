@@ -14,6 +14,7 @@ var userSchema = Schema( {
   googlename:String,
   googleemail:String,
   username:String,
+  role:Number,   // 0 = Athlete, 1 = Coach
 } );
 
 module.exports = mongoose.model( 'User', userSchema );

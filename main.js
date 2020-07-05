@@ -4,6 +4,7 @@ const express = require("express"),
   app = express(),
   homeController = require("./controllers/homeController"),
   errorController = require("./controllers/errorController"),
+  scheduleInputController = require("./controllers/scheduleInputController"),
   layouts = require("express-ejs-layouts");
 
   const authRouter = require('./routes/authentication');
@@ -40,10 +41,14 @@ app.get("/", homeController.homeScreen)
 app.post("/addEasyRun", homeController.postedEasyRunForm)
 app.post("/addWorkout", homeController.postedWorkoutForm)
 app.post("/addCrossTrain", homeController.postedCrossTrainForm)
+app.post("/addScheduleInput", scheduleInputController.addScheduleInput)
+
 app.get("/easyRun", homeController.easyRunPage)
 app.get("/workout", homeController.workoutPage)
 app.get("/crossTrain", homeController.crossTrainPage)
 app.get("/showLog/:id", homeController.showLog)
+app.get("/inputSchedule", homeController.inputSchedule)
+
 
 /*
 app.get("/log", (req, res) => {

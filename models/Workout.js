@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const workoutSchema = Schema( {
+    //id: ObjectId,
     userId: ObjectId,
     year: Number,
     month: Number,

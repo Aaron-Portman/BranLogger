@@ -1,0 +1,15 @@
+#inputScheduleForm{
+    margin: 8% auto;
+    display: grid;
+
+}
+
+.inputScheduleRow{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    
+}
+.textAlignCenter{
+    text-align: center;
+}

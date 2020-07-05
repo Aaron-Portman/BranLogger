@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/css/bootstrap.css">
     <title style="color: black;">BranLogger 1.0</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css/inputSchedule.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
   <div class="jumbotron" style="background-color: rgb(35,65,155,.8); padding: 2%;">
@@ -23,10 +27,9 @@
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="/">Home</a>
       </li>
+      <% if (user.role == 0){ %>
         <li class="nav-item">
-          
           <a class="nav-link" data-toggle="tab" href="/showLog/<%= user._id %>">Log</a>
-          
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="/easyRun">Enter Easy/Long Run</a>
@@ -37,6 +40,13 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="/crossTrain">Enter Cross Training</a>
         </li>
+      <% } %>
+      <!-- if coach -->
+      <% if (user.role == 1){ %>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="/inputSchedule">Input Athlete Schedule</a>
+        </li>
+      <% } %>
       </ul>
 </div>
 <% } %>

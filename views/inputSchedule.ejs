@@ -1,0 +1,64 @@
+<!-- <form id="inputScheduleForm">
+    <div class="form-row align-items-center">
+      <div class="col">
+        <label class="sr-only" for="inlineFormInput">Name</label>
+        <input type="text" class="form-control" id="inlineFormInput" placeholder="Jane Doe">
+      </div>
+      <div class="col">
+        <label class="sr-only" for="inlineFormInputGroup">Username</label>
+        <div class="input-group mb-2">
+          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </div>
+    </div>
+ </form> -->
+   <!--
+  <form>
+    <div class="row">
+      <div class="col">
+        <input type="date" id="date" class="form-control" placeholder="Date">
+        
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Last name">
+      </div>
+    </div>
+  </form> -->
+<form class="form-inline" id="inputScheduleForm" action="/addScheduleInput" method="POST">
+  <div class="inputScheduleRow">
+    <div>Date</div>
+    <div>Mileage</div>
+    <div>Workout/Extras</div>
+    <div>Exercises</div>
+  </div>
+  <% for(var i = 0; i < 7; i++) { %>
+  <div class="inputScheduleRow">
+    <input type="date" class="form-control inputScheduleDate" name="date[]" placeholder="Date">
+    <input type="number" value="6" class="form-control textAlignCenter" name="mileage[]" placeholder="Mileage">
+    <input type="text" value="Strides"class="form-control textAlignCenter" name="workoutOrExtra[]" placeholder="Workout/Extras">
+    <input type="text" value="Core" class="form-control" name="exercise[]" placeholder="Exercises"> 
+  </div>
+  <% } %>
+  <button type="submit">Submit</button>
+
+  
+ 
+
+
+
+</form> 
+  <script>
+    let inputScheduleDates = document.getElementsByClassName('inputScheduleDate')
+    console.log(inputScheduleDates)
+    for(var i = 0; i < inputScheduleDates.length; i++){
+        console.log(inputScheduleDates[i])
+        let inputScheduleDate = inputScheduleDates[i]
+        let date = new Date()
+        date.setDate(date.getDate() + i)
+        console.log(date)
+        inputScheduleDate.value = date.toISOString().slice(0, 10) 
+    }
+</script>

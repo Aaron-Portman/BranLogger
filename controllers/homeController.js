@@ -26,10 +26,6 @@ exports.crossTrainPage = (req, res) => {
     res.render("crossTrain")
 }
 
-exports.inputSchedule = (req, res) => {
-    res.render("inputSchedule")
-}
-
 exports.postedCrossTrainForm = async (req,res) => {
     let grade = req.body.grade
     let gradeColor = setGradeColor(grade)

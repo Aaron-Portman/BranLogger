@@ -47,7 +47,7 @@ app.get("/easyRun", homeController.easyRunPage)
 app.get("/workout", homeController.workoutPage)
 app.get("/crossTrain", homeController.crossTrainPage)
 app.get("/showLog/:id", homeController.showLog)
-app.get("/inputSchedule", homeController.inputSchedule)
+app.get("/inputSchedule", scheduleInputController.inputSchedule)
 
 
 /*

@@ -27,6 +27,8 @@
       </div>
     </div>
   </form> -->
+
+
 <form class="form-inline" id="inputScheduleForm" action="/addScheduleInput" method="POST">
   <div class="inputScheduleRow">
     <div>Date</div>
@@ -42,8 +44,15 @@
     <input type="text" value="Core" class="form-control" name="exercise[]" placeholder="Exercises"> 
   </div>
   <% } %>
-  <button type="submit">Submit</button>
-
+  <form >
+    <h1>Athlete List:</h1>
+    <ul id="athletes">
+      <%athleteList.forEach( athlete => { %>
+        <li><%=athlete.googlename%> <input type="checkbox" name="selectedUsersToApply[]" class="athletes"></li>
+      <%}) %>
+    </ul>
+    <button type="submit">Submit</button>
+  </form>
   
  
 

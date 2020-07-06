@@ -1,7 +1,6 @@
 #inputScheduleForm{
     margin: 8% auto;
     display: grid;
-
 }
 
 .inputScheduleRow{
@@ -12,4 +11,9 @@
 }
 .textAlignCenter{
     text-align: center;
+}
+
+.athletes{
+    width: 14px;
+    height: 14px ;
 }

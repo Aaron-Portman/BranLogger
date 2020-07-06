@@ -21,5 +21,8 @@ const weekSchema = Schema( {
     startMonth: Number,
     startDay: Number,
 });
+const chosenAthleteSchema = Schema( {
+    chosen: Object,
+})
 
 module.exports = mongoose.model('Week', weekSchema)

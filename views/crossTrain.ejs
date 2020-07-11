@@ -1,63 +1,63 @@
-
-    <% if (loggedIn) { %>
-    <div class="main-block">
-      <h1>Cross Train Form</h1>
-      <form action="/addCrossTrain" method="POST">
+<% if (loggedIn) { %>
+<div class="main-block">
+    <h1>Cross Train Form</h1>
+    <form action="/addCrossTrain" method="POST">
         <div class="info">
             <div class="info-item">
                 <label class="icon" for="workout"><i class="fas fa-swimming-pool"></i></label>
-                <input type="text" value="biked" name="workout" id="workout" placeholder="Enter Your Cross Training" required/>
+                <input type="text" value="biked" name="workout" id="workout" placeholder="Enter Your Cross Training"
+                    required />
             </div>
 
-            <div  class="info-item">
+            <div class="info-item">
                 <label class="icon" for="seconds"><i class="fas fa-stopwatch"></i></label>
-                <input type="text" value ="50"name="time" id="time" placeholder="Minutes" required/>
-              </div>
-          
-            <div  class="info-item">
+                <input type="text" value="50" name="time" id="time" placeholder="Minutes" required />
+            </div>
+
+            <div class="info-item">
                 <label class="icon" for="date"><i class="fas fa-calendar"></i></label>
-                <input type="date" value="2020-07-04" name="date" id="date" placeholder="Date" required/>
+                <input type="date" value="2020-07-04" name="date" id="date" placeholder="Date" required />
             </div>
         </div>
         <div class="grade-type">
-          <h3>How was your Cross Training?</h3>
-          <div> 
-            <input type="radio" value="Excellent" id="radioOne" name="grade" checked/>
-            <label for="radioOne" class="radio">Excellent</label>
-          </div>
-          <div>
-            <input type="radio" value="Very Good" id="radioTwo" name="grade" />
-            <label for="radioTwo" class="radio">Very Good</label>
-          </div>
-          <div>
-            <input type="radio" value="Good" id="radioThree" name="grade" />
-            <label for="radioThree" class="radio">Good</label>
-          </div>
-          <div>
-            <input type="radio" value="Neutral" id="radioFour" name="grade" />
-            <label for="radioFour" class="radio">Neutral</label>
-          </div>
-          <div>
-            <input type="radio" value="Not Good" id="radioFive" name="grade" />
-            <label for="radioFive" class="radio">Not Good</label>
-          </div>
-          <div>
-            <input type="radio" value="Very Bad" id="radioSix" name="grade" />
-            <label for="radioSix" class="radio">Very Bad</label>
-          </div>
-          <div>
-            <input type="radio" value="Terrible" id="radioSeven" name="grade" />
-            <label for="radioSeven" class="radio">Terrible</label>
-          </div>
+            <h3>How was your Cross Training?</h3>
+            <div>
+                <input type="radio" value="Excellent" id="radioOne" name="grade" checked />
+                <label for="radioOne" class="radio">Excellent</label>
+            </div>
+            <div>
+                <input type="radio" value="Very Good" id="radioTwo" name="grade" />
+                <label for="radioTwo" class="radio">Very Good</label>
+            </div>
+            <div>
+                <input type="radio" value="Good" id="radioThree" name="grade" />
+                <label for="radioThree" class="radio">Good</label>
+            </div>
+            <div>
+                <input type="radio" value="Neutral" id="radioFour" name="grade" />
+                <label for="radioFour" class="radio">Neutral</label>
+            </div>
+            <div>
+                <input type="radio" value="Not Good" id="radioFive" name="grade" />
+                <label for="radioFive" class="radio">Not Good</label>
+            </div>
+            <div>
+                <input type="radio" value="Very Bad" id="radioSix" name="grade" />
+                <label for="radioSix" class="radio">Very Bad</label>
+            </div>
+            <div>
+                <input type="radio" value="Terrible" id="radioSeven" name="grade" />
+                <label for="radioSeven" class="radio">Terrible</label>
+            </div>
         </div>
         <h3>Notes:</h3>
         <h5>Do you feel like you're getting stronger? </h5>
         <h5>Did you have any pains?</h5>
         <textarea name="notes" rows="4">notesfor workout</textarea>
         <button type="submit" href="/showLog">Submit</button>
-      </form>
-    </div>
-    <% }  %>
-  <script>
-      document.getElementById('date').value = new Date().toISOString().slice(0, 10)
-  </script>
+    </form>
+</div>
+<% }  %>
+<script>
+    document.getElementById('date').value = new Date().toISOString().slice(0, 10)
+</script>

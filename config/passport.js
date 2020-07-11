@@ -1,19 +1,12 @@
 // config/passport.js
 
-// load all the things we need
-//var LocalStrategy    = require('passport-local').Strategy;
-//var FacebookStrategy = require('passport-facebook').Strategy;
-//var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-// load up the user model
-var User = require('../models/User');
 
-// load the auth variables
-var configAuth = require('./auth');
+const User = require('../models/User');
+const configAuth = require('./auth');
 
 module.exports = function(passport) {
-
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
       console.log('in serializeUser '+user)
@@ -28,10 +21,6 @@ module.exports = function(passport) {
         });
     });
 
-    // code for login (use('local-login', new LocalStategy))
-    // code for signup (use('local-signup', new LocalStategy))
-    // code for facebook (use('facebook', new FacebookStrategy))
-    // code for twitter (use('twitter', new TwitterStrategy))
 
     // =========================================================================
     // GOOGLE ==================================================================
@@ -44,7 +33,6 @@ module.exports = function(passport) {
 
     },
     function(token, refreshToken, profile, done) {
-
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
         process.nextTick(function() {
@@ -67,22 +55,20 @@ module.exports = function(passport) {
                     console.dir(profile)
                     console.log(`\n****\n`)
                     // if the user isnt in our database, create a new user
+                    let coachesArr = ["sdevans@brandeis.edu", "jsliwoski@brandeis.edu", "nathanasopoulos@brandeis.edu"]
+                    let role = 0
+                    if(coachesArr.includes(profile.emails[0].value)){
+                        role = 1
+                    } 
                     var newUser
                      = new User(
                          {googleid: profile.id,
                           googletoken: token,
                           googlename:profile.displayName,
                           googleemail:profile.emails[0].value,
+                          role: role,
                         });
 
-                    // set all of the relevant information
-                    /*
-                    newUser.google = {}
-                    newUser.google.id    = profile.id;
-                    newUser.google.token = token;
-                    newUser.google.name  = profile.displayName;
-                    newUser.google.email = profile.emails[0].value; // pull the first email
-                    */
                     // save the user
                     newUser.save(function(err) {
                       console.log("saving the new user")

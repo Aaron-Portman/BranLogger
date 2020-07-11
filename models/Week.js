@@ -17,12 +17,10 @@ const daySchema = Schema( {
 const weekSchema = Schema( {
     userId: ObjectId,
     days: [daySchema],
-    startYear: Number,
-    startMonth: Number,
-    startDay: Number,
+    // startYear: Number,
+    // startMonth: Number,
+    // startDay: Number,
 });
-const chosenAthleteSchema = Schema( {
-    chosen: Object,
-})
+
 
 module.exports = mongoose.model('Week', weekSchema)

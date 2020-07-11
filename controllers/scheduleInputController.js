@@ -1,27 +1,28 @@
 "use strict"
 const Week = require("../models/Week")
 const User = require("../models/User")
+const WeekToUser = require("../models/WeekToUser")
 
 exports.inputSchedule = (req, res) => {
-    res.render("inputSchedule")
+    User.find().then((athleteList) => {
+        res.locals.athleteList = athleteList
+        res.render("inputSchedule")
+    })
 }
-exports.addScheduleInput = async (req,res,next) => {
+exports.addScheduleInput = (req, res, next) => {
     
     try{
         let dates = req.body['date[]']
         let mileages = req.body['mileage[]']
         let workoutOrExtras = req.body['workoutOrExtra[]']
         let exercises = req.body['exercise[]']
-
-        //trying to save selected users to apply schedule to
         // let selectedUsers = req.body['selectedUsersToApply[]']
-        // console.log("SELECTED" ,selectedUsers)
+        let userIDs = req.body['userIDs[]']
+        let selected = req.body['selected[]']
 
-        // let isChosen = new ChosenAthlete({
-        //     isChosen: selectedUsers
-
-        // })
+       // trying to save selected users to apply schedule to
         
+
         let days = []
         for(let i = 0; i < dates.length; i++){
             let d = new Date(dates[i])
@@ -39,17 +40,40 @@ exports.addScheduleInput = async (req,res,next) => {
         let newWeek = new Week({
             // userId: ObjectId,
             days,
-            startYear: days[0].year,
-            startMonth: days[0].month,
-            startDay: days[0].day,
+            // startYear: days[0].year,
+            // startMonth: days[0].month,
+            // startDay: days[0].day,
         })
+        newWeek.save().then((week) => {
+            let monday = new Date()
+            let today = monday.getDay()
+            let distanceToMonday
+            if(today != 0){
+                distanceToMonday = today - 1
+            } else {
+                distanceToMonday = 6
+            }
+            monday.setDate(monday.getDate() - distanceToMonday)
 
-        res.locals.athleteList = await User.find()
-        await newWeek.save().then((week) => {
             console.log(week)
+            // console.log("SELECTED" ,selected)
+            for(let i = 0; i < userIDs.length; i++){
+                if(selected[i] == "1"){
+                    let weekToUser = new WeekToUser({
+                        userId: userIDs[i],
+                        weekId: week.id,
+                        year: monday.getFullYear(),
+                        month: monday.getMonth() + 1,
+                        day: monday.getDate(),
+                    })
+                    weekToUser.save().then((wtu)=>{
+                        console.log(wtu) 
+                    })   
+                }
+            }
         })
-        res.render("inputSchedule")
-    } catch(e){
+        
+    } catch(e) {
         next(e)
     }
 }

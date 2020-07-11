@@ -115,11 +115,11 @@ display: flex;
 margin: 6px 0;
 }
 @media (min-width: 568px) {
-.info {
-flex-flow: row wrap;
-justify-content: space-between;
-}
-.info-item {
-width: 48%;
-}
+  .info {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+  .info-item {
+    width: 48%;
+  }
 }

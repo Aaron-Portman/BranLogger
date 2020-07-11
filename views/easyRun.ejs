@@ -1,35 +1,37 @@
-
 <div class="main-block">
   <h1>Easy & Long Run Form</h1>
   <form action="/addEasyRun" method="POST">
-    <h1 style="text-align: center; background-color:rgb(35,65,155,.8);color: white; border-radius: 20px; margin-bottom: 5%;">Coaches Recommendation: 5 miles</h1>
+    <h1
+      style="text-align: center; background-color:rgb(35,65,155,.8);color: white; border-radius: 20px; margin-bottom: 5%;">
+      Coaches Recommendation: 5 miles
+    </h1>
 
     <div class="info">
-      
-      <div  class="info-item">
+
+      <div class="info-item">
         <label class="icon" for="minutes"><i class="fas fa-stopwatch"></i></label>
-        <input type="text" value ="30" name="minutes" id="time" placeholder="Minutes" required/>
+        <input type="text" value="30" name="minutes" id="time" placeholder="Minutes" required />
       </div>
 
-      <div  class="info-item">
+      <div class="info-item">
         <label class="icon" for="seconds"><i class="fas fa-stopwatch"></i></label>
-        <input type="text" value ="5"name="seconds" id="time" placeholder="Seconds" required/>
+        <input type="text" value="5" name="seconds" id="time" placeholder="Seconds" required />
       </div>
       <div class="info-item">
-        <label class="icon" for="name" ><i class="fas fa-route"></i></label>
-        <input type="text" value ="5"name="mileage" id="WorkoutReps" placeholder="Enter your mileage" required/>
+        <label class="icon" for="name"><i class="fas fa-route"></i></label>
+        <input type="text" value="5" name="mileage" id="WorkoutReps" placeholder="Enter your mileage" required />
       </div>
 
-      <div  class="info-item">
+      <div class="info-item">
         <label class="icon" for="age"><i class="fas fa-calendar"></i></label>
-        <input type="date" value="2020-05-05" name="date" id="date" placeholder="Date" required/>
+        <input type="date" value="2020-05-05" name="date" id="date" placeholder="Date" required />
       </div>
     </div>
-    
+
     <div class="grade-type">
       <h3>How was your run?</h3>
-      <div> 
-        <input type="radio" value="Excellent" id="radioOne" name="grade" checked/>
+      <div>
+        <input type="radio" value="Excellent" id="radioOne" name="grade" checked />
         <label for="radioOne" class="radio">Excellent</label>
       </div>
       <div>
@@ -67,4 +69,3 @@
 <script>
   document.getElementById('date').value = new Date().toISOString().slice(0, 10)
 </script>
-

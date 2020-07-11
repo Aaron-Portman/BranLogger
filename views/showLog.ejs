@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <style>
-        
-    </style>
-    <body>
-
-    </body>
-    
-</html>
 <h1>Workouts:</h1>
 <% workouts.forEach(workout => { %>
-    <div style="background-color: <%= workout.gradeColor %>; padding:3%; margin:10px">
-        
-
-        <%=workout.workout%>
-        <%=workout.year%>
-        <%=workout.month%>
-        <%=workout.day%>
-        <%=workout.dayOfWeek%>
-        <%=workout.grade%>
-        <%=workout.notes%>
-
-    </div>
+<div style="background-color: <%= workout.gradeColor %>; padding:3%; margin:10px">
+    <%=workout.workout%>
+    <%=workout.year%>
+    <%=workout.month%>
+    <%=workout.day%>
+    <%=workout.dayOfWeek%>
+    <%=workout.grade%>
+    <%=workout.notes%>
+</div>
 <% }); %>
 <h1>Easy Runs:</h1>
 <% easyruns.forEach(run => { %>
     <div style="background-color: <%= run.gradeColor %>; padding:3%; margin:10px">
-        
         <h3>Distance: <%=run.mileage%> miles</h3>
         <h3> Time: <%=run.minutes%>:<%=run.seconds%> </h3>
         <h3>Pace: <%= run.avgTime %></h3>
@@ -37,7 +24,6 @@
         <%=run.dayOfWeek%>
         <%=run.grade%>
         <%=run.notes%> -->
-
     </div>
 <% }); %>
 <h2>Cross Trains:</h2>
@@ -46,5 +32,5 @@
         <h3><%=crossTrain.workout %></h3>
         <h3><%=crossTrain.time %></h3>
         <h3><%=crossTrain.notes %></h3>
-    </div>  
+    </div>
 <% }); %>

@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="/">Home</a>
             </li>
-            <% if (user.role == 0){ %>
+            <% if (user.role == 0) { %>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="/showLog/<%= user._id %>">Log</a>
             </li>
@@ -47,7 +47,7 @@
             </li>
             <% } %>
             <!-- if coach -->
-            <% if (user.role == 1){ %>
+            <% if (user.role == 1) { %>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="/inputSchedule">Input Athlete Schedule</a>
             </li>

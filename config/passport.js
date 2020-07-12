@@ -9,13 +9,11 @@ const configAuth = require('./auth');
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-      console.log('in serializeUser '+user)
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-      console.log('in deserializeUser')
         User.findById(id, function(err, user) {
             done(err, user);
         });
@@ -43,7 +41,7 @@ module.exports = function(passport) {
                 console.dir(err)
                 console.dir(user)
                 console.log("\n\n")
-                if (err){
+                if (err) {
                     console.log("error in nextTick:"+err)
                     return done(err);
                 } else if (user) {
@@ -57,7 +55,7 @@ module.exports = function(passport) {
                     // if the user isnt in our database, create a new user
                     let coachesArr = ["sdevans@brandeis.edu", "jsliwoski@brandeis.edu", "nathanasopoulos@brandeis.edu"]
                     let role = 0
-                    if(coachesArr.includes(profile.emails[0].value)){
+                    if (coachesArr.includes(profile.emails[0].value)) {
                         role = 1
                     } 
                     var newUser

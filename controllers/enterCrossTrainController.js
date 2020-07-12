@@ -27,7 +27,7 @@ exports.postedCrossTrainForm = async (req,res) => {
             console.log(crossTrain)
             res.redirect("/showLog/" + req.user._id)
         })
-    } catch(e){
+    } catch(e) {
         console.log(e)
     }
 }

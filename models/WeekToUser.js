@@ -7,6 +7,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const weekToUserSchema = Schema( {
     userId: ObjectId,
     weekId: ObjectId,
+    dayOrder: [Number],
     year: Number,
     month: Number,
     day: Number,

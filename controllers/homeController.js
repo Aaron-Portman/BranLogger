@@ -3,7 +3,7 @@ const User = require("../models/User")
 
 exports.homeScreen = async (req, res, next) => {
     try {
-        if(req.user !== undefined && req.user !== null) {
+        if (req.user !== undefined && req.user !== null) {
             res.locals.teamMembers = await User.find()
             res.render("home")
         } else {
@@ -26,19 +26,19 @@ exports.showLog = async (req,res) => {
 }
 
 function setGradeColor(grade) {
-    if(grade == "Excellent") {
+    if (grade == "Excellent") {
         gradeColor = "#309143"
-    } else if(grade == "Very Good") {
+    } else if (grade == "Very Good") {
         gradeColor = "#51b364"
-    } else if(grade == "Good") {
+    } else if (grade == "Good") {
         gradeColor = "#8ace7e"
-    } else if(grade == "Neutral") {
+    } else if (grade == "Neutral") {
         gradeColor = "#ffda66"
-    } else if(grade == "Not Good") {
+    } else if (grade == "Not Good") {
         gradeColor = "#f0bd27"
-    } else if(grade == "Very Bad") {
+    } else if (grade == "Very Bad") {
         gradeColor = "#e03531"
-    } else if(grade == "Terrible") {
+    } else if (grade == "Terrible") {
         gradeColor = "#b60a1c"
     }
     return gradeColor

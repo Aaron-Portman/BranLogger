@@ -33,7 +33,7 @@ const approvedLogins = ["tjhickey@brandeis.edu", "tjhickey724@gmail.com","csjbs2
 // here is where we check on their logged in status
 router.use((req,res,next) => {
   res.locals.loggedIn = false
-  if (req.isAuthenticated()){
+  if (req.isAuthenticated()) {
       res.locals.user = req.user
       res.locals.loggedIn = true
     }
@@ -44,11 +44,11 @@ router.use((req,res,next) => {
 })
 // here are the authentication routes
 
-router.get('/loginerror', function(req,res){
+router.get('/loginerror', function(req,res) {
     res.render('loginerror',{})
 })
 
-router.get('/login', function(req,res){
+router.get('/login', function(req,res) {
     res.render('login',{})
 })
 
@@ -75,7 +75,7 @@ router.get('/login/authorized',
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     res.locals.loggedIn = false
-    if (req.isAuthenticated()){
+    if (req.isAuthenticated()) {
       res.locals.loggedIn = true
       return next();
     } else {

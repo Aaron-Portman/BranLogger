@@ -5,7 +5,7 @@
         <div>Workout/Extras</div>
         <div>Exercises</div>
     </div>
-    <% for(var i = 0; i < 7; i++) { %>
+    <% for (var i = 0; i < 7; i++) { %>
         <div class="inputScheduleRow">
             <input type="date" class="form-control inputScheduleDate" name="date[]" placeholder="Date">
             <input type="number" value="6" class="form-control textAlignCenter" name="mileage[]" placeholder="Mileage">
@@ -14,26 +14,26 @@
             <input type="text" value="Core" class="form-control" name="exercise[]" placeholder="Exercises">
         </div>
     <% } %>
-    <form>
-        <h1>Athlete List:</h1>
-        <ul id="athletes">
-            <% athleteList.forEach(athlete => { %>
-                <input type="text" hidden name="userIDs[]" value="<%=athlete.id%>">
-                <input type="number" hidden name="selected[]" value="0">
-                <li><%=athlete.googlename%> <input type="checkbox" name="selectedUsersToApply[]" class="athletes"></li>
-            <%}); %>
-        </ul>
-        <button type="submit">Submit</button>
-    </form>
+    
+    <h1>Athlete List:</h1>
+    <ul id="athletes">
+        <% athleteList.forEach(athlete => { %>
+            <input type="text" hidden name="userIDs[]" value="<%=athlete.id%>">
+            <input type="number" hidden name="selected[]" value="0">
+            <li><%=athlete.googlename%> <input type="checkbox" name="selectedUsersToApply[]" class="athletes"></li>
+        <%}); %>
+    </ul>
+    <button type="submit">Submit</button>
+    
 
-</form> 
+</form>
 <script>
     let inputScheduleDates = document.getElementsByClassName('inputScheduleDate')
 
     let monday = new Date()
-    let today = monday.getDay()
+    let today = monday.getDay() 
     let distanceToMonday
-    if(today != 0){
+    if (today != 0) {
         distanceToMonday = today - 1
     } else {
         distanceToMonday = 6
@@ -48,11 +48,11 @@
 
     let checkBoxes = document.querySelectorAll("#athletes input[type=checkbox]")
     let hiddenInputs = document.querySelectorAll("#athletes input[type=number]")
-    for(let i = 0; i < hiddenInputs.length; i++){
+    for (let i = 0; i < hiddenInputs.length; i++) {
         let checkbox = checkBoxes[i]
         checkbox.addEventListener("change", (e)=>{
            let hiddenInput = hiddenInputs[i]
-           if(e.target.checked){
+           if (e.target.checked) {
                hiddenInput.value = 1
            } else {
                hiddenInput.value = 0

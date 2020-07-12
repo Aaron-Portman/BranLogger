@@ -25,7 +25,7 @@ exports.postedWorkoutForm = async (req,res) => {
             console.log(workout)
             res.redirect("/showLog/" + req.user._id)
         })
-    } catch(e){
+    } catch(e) {
         console.log(e)
     }
 }

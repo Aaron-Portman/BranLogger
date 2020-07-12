@@ -13,7 +13,7 @@ const express = require("express"),
     const authRouter = require('./routes/authentication');
     const isLoggedIn = authRouter.isLoggedIn
 
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 mongoose.connect(
     'mongodb://localhost/branlogger',
     {useNewUrlParser:true, useUnifiedTopology: true
@@ -30,12 +30,10 @@ app.use(
     })
 );
 
-app.use(express.json());
-app.use(layouts);
-app.use(express.static("public"));
+app.use(express.json())
+app.use(layouts)
+app.use(express.static("public"))
 app.use(authRouter)
-// app.use(errorController.pageNotFoundError);
-app.use(errorController.internalServerError);
 
 app.get("/", homeController.homeScreen)
 //app.post("/", homeController.homeScreen)
@@ -50,6 +48,8 @@ app.get("/crossTrain", enterCrossTrainController.crossTrainPage)
 app.get("/showLog/:id", homeController.showLog)
 app.get("/inputSchedule", scheduleInputController.inputSchedule)
 
+app.use(errorController.pageNotFoundError)
+app.use(errorController.internalServerError)
 
 app.listen(app.get("port"), () => {
     console.log(`Server running at http://localhost:${app.get("port")}`);

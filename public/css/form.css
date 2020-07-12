@@ -42,14 +42,14 @@ background: #ebebeb;
 width: 100%;
 }
 input {
-width: calc(100% - 57px);
-height: 36px;
-padding-left: 10px; 
-margin: 0 0 12px -5px;
-border-radius: 0 5px 5px 0;
-border: solid 1px #cbc9c9;
-box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-background: #fff; 
+  width: calc(100% - 70px);
+  height: 40px;
+  padding-left: 17px;
+  margin: 0 0 12px -4px;
+  border-radius: 0 5px 5px 0;
+  border: solid 1px #cbc9c9;
+  box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+  background: #fff;
 }
 .icon {
 padding: 9px 15px;

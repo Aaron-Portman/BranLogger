@@ -1,0 +1,34 @@
+What We Are Doing Now:
+- right now, on the inputs, we have the name="...[]" to specify what data to send and what the data is called when the server receives it in the request (ex: let dates = req.body['date[]'] in scheduleInputController.js)
+- we specify on the opening <form> tag, like method="POST", and what URL we are sending the request to
+
+
+What We Want To Doing:
+- we want to send an AJAX request (basically an asyncronous POST request) to the server, and then do something with the response (like say if the data has been saved or not)
+How To Do It:
+
+Packaging The Data On The Frontend:
+- First, this will all be done within the <script></script> tags since we are doing this on the frontend with javascript
+- so, we want to handle all of this with an event listener (.addEventListener('click', (e) => {})) on the submit button
+- the default action when a form is submitted is that the page is refreshed, and refreshed with whatever response the server sent back
+- we prevent the page from refreshing with the line "e.preventDefault()" in the callback function (https://www.w3schools.com/jsref/event_preventdefault.asp)
+- before we send the AJAX request, we need to "package" the data. This is just getting all of our data and putting them in variables (this is done for us with the way we're doing
+it now through the name="...")
+- so use javascript to put the data into variable names (you can use like document.getElementById() or document.getElementsByClassName() or document.querySelector() or 
+document.querySelectorAll()) - (I think everything will be an array, like mileages, exercises,...)
+- then you need to learn how to make an AJAX request. You can do this either with plain javascript or with a library. I recommend a library (axios)
+    - you need to add this to layout.ejs in between the <head></head> tags: <script src="https://unpkg.com/axios/dist/axios.min.js"></script> (this gets the library)
+    - and here is an example of the axios post request:
+        - axios.post('/addScheduleInput', {
+            key1: "value1",
+            key2: "value2",
+            key3: "value3"
+        }).then((response) => {
+            // do something to alert the user that the data has been successfully saved
+        }).catch(function (error) {
+            // Hopefully doesn't error, but it goes here if something went wrong on the server
+        });
+
+Handling The Data On The Backend
+- bodyParser will put all the data in "req.body" when you handle the request in scheduleInputController.js
+- just put the data in the same variables and the logic we already have is the same

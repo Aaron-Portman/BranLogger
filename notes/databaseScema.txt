@@ -1,0 +1,32 @@
+Day Schema
+    - description: a day of the week
+    - fields:
+        - mileage
+        - workoutOrExtras
+        - exercises
+
+
+Week Schema
+    - description: only contains an array of distinct dayIds (not necessarily 7)
+    - fields
+        - dayIds
+
+
+Week To User Schema
+    - description: collection of a week being assigned to a User
+    - note: the date is the Monday of the week
+    - fields
+        - userId
+        - weekId
+        - dayOrder (array of 7 numbers (index 0 = Monday), corresponding to the dayIds, orderer by the .sort() function)
+        - year
+        - month
+        - day
+
+
+How To Get A Week For A User
+1. Start with userId and the year/month/day of the monday of the week you're looking for (may need to calculate Monday's date from today's date)
+2. weekToUser.findOne() - for the document with matching userId, year, month, and day
+3. Use the weekId of the weekToUser to do Week.findOne({ _id: weekId})
+4. Use dayIds of week to find each day (day.findOne({ _id: dayId}))
+5. Use dayOrder (array of dayId indexes) from weekToUser to determine the order of the week (i.e. what day corresponds to Monday, what day corresponds to Tuesday,...)

@@ -1,9 +1,44 @@
 "use strict"
 
 const EasyRun = require("../models/EasyRun")
+const WeekToUser = require("../models/WeekToUser")
+const Week = require("../models/Week")
+const Day = require("../models/Day")
 
-exports.easyRunPage = (req, res) => {
-    console.log("test")
+exports.easyRunPage = async (req, res) => {
+    console.log("entered get")
+    let monday = new Date()
+    let today = monday.getDay() // saving today's date
+    let distanceToMonday
+    if (today != 0) {
+        distanceToMonday = today - 1
+    } else {
+        distanceToMonday = 6
+    }
+    monday.setDate(monday.getDate() - distanceToMonday)
+    
+    let weekToUser = await WeekToUser.findOne({
+        userId: req.user._id,
+        year: monday.getFullYear(),
+        month: monday.getMonth() + 1,
+        day: monday.getDate(),
+    })
+    console.log("week to user found")
+
+    let week = await Week.findOne({
+        _id: weekToUser.weekId
+    })
+    console.log("week found")
+    week.dayIds.sort()
+
+    let dayToFindIndex = weekToUser.dayOrder[distanceToMonday]
+    let dayToReturn = await Day.findOne(week.dayIds[dayToFindIndex])
+    
+    //find the day where the .getDate == distance to monday
+    res.locals.mileage = dayToReturn.mileage
+    res.locals.exercises = dayToReturn.exercises
+    res.locals.workoutOrExtras = dayToReturn.workoutOrExtras
+    
     res.render("easyRun")
 }
 

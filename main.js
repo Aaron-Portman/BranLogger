@@ -50,7 +50,7 @@ app.get("/workout", workoutController.workoutPage)
 app.get("/crossTrain", crossTrainController.crossTrainPage)
 app.get("/showLog/:id", homeController.showLog)
 app.get("/inputSchedule", scheduleInputController.inputSchedule)
-app.get("/addTemplate", templateController.addTemplate)
+app.get("/addTemplate", templateController.addTemplatePage)
 
 app.use(errorController.pageNotFoundError)
 app.use(errorController.internalServerError)

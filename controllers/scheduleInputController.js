@@ -2,6 +2,7 @@ const Day = require("../models/Day")
 const Week = require("../models/Week")
 const User = require("../models/User")
 const WeekToUser = require("../models/WeekToUser")
+const {addWeek} = require("../helpers/weekHelper")
 const { set } = require("mongoose")
 
 // GET Request
@@ -23,73 +24,16 @@ exports.addScheduleInput = async (req, res, next) => {
         // let selectedUsers = req.body['selectedUsersToApply[]']
         let userIDs = req.body.userIDs // same length as selected
         // let selected = req.body['selected[]'] // same length as userIDs - array of 0s and 1s (as Strings)
-
-        // Trim All User Input
-        for (let i = 0; i < mileages.length; i++) {
-            mileages[i] = mileages[i].trim()
-            workoutOrExtras[i] = workoutOrExtras[i].trim()
-            exercises[i] = exercises[i].trim()
-        }
-
-        // DAYS
-
-        // List Of Ids Of Specific Days
-
-        let dayIdSet = new Set() // Distinct Day Ids
-        let days = [] // All Days (length of 7)
-        
-        // For each day
-        for (let i = 0; i < mileages.length; i++) {
-            let inputDay = {
-                mileage: mileages[i],
-                exercises: exercises[i],
-                workoutOrExtras: workoutOrExtras[i],
-            }
-            
-            // Check if it's in the database
-            let day = await Day.findOne(inputDay)
-            // If so, get the Id
-            if (day) {
-                days.push(day)
-                dayIdSet.add(day.id) 
-            } else { // else, Insert It
-                // delete inputDay._id
-                let day2 = new Day(inputDay)
-                
-                let insertedDay = await day2.save()
-                days.push(insertedDay)
-                dayIdSet.add(insertedDay.id) 
-            }
-        }
-
-        // WEEKS
-        let weekId
-        let dayIdArr = [...dayIdSet]
-        console.log('dayIdArr is ', dayIdArr)
-        // Insert A Week If It Doesn't Exist
-        let searchWeek = await Week.find({ 
-            days: { "$size" : dayIdSet.size, "$all": dayIdArr }  
-        })
-        // if it exists, get the id
-        if (searchWeek.length > 0) {
-            weekId = searchWeek.id 
-            dayIdArr = searchWeek.dayIdSet
-        } else { // if it does not exist, insert it, then get the id
-            let week = new Week({
-                dayIds: dayIdArr
-            })
-            
-            let insertedWeek = await week.save()
-            weekId = insertedWeek.id 
-        }
-        
-        
+        let week = await addWeek(mileages, workoutOrExtras, exercises)
         // WEEK TO USER
 
         // days - at each index, has day, each day has an id (length of 7)
         // dayIdSet - an arry with the Ids in the right order (not necessarily have a length of 7)
 
-        dayIdArr.sort()
+        console.log(week)
+        let dayIdArr = week[0].dayIds.sort()
+        let weekId = week[0].id
+        let days = week[1]
         // Creates Order Array
         let order = []
         for (let i = 0; i < days.length; i++) {
@@ -110,6 +54,7 @@ exports.addScheduleInput = async (req, res, next) => {
                 distanceToMonday = 6
             }
             monday.setDate(monday.getDate() - distanceToMonday)
+
 
             let weekToUser = new WeekToUser({
                 userId: userIDs[i],

@@ -23,7 +23,7 @@ exports.easyRunPage = async (req, res) => {
         month: monday.getMonth() + 1,
         day: monday.getDate(),
     })
-    console.log("week to user found")
+    console.log("week to user found: "  + weekToUser)
 
     let week = await Week.findOne({
         _id: weekToUser.weekId

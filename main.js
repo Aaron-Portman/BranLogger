@@ -6,10 +6,11 @@ const express = require("express"),
     app = express(),
     homeController = require("./controllers/homeController"),
     errorController = require("./controllers/errorController"),
-    enterEasyRunController = require("./controllers/enterEasyRunController"),
-    enterWorkoutController = require("./controllers/enterWorkoutController"),
-    enterCrossTrainController = require("./controllers/enterCrossTrainController"),
+    easyRunController = require("./controllers/easyRunController"),
+    workoutController = require("./controllers/workoutController"),
+    crossTrainController = require("./controllers/crossTrainController"),
     scheduleInputController = require("./controllers/scheduleInputController"),
+    templateController = require("./controllers/templateController"),
     layouts = require("express-ejs-layouts");
 
     const authRouter = require('./routes/authentication');
@@ -39,16 +40,17 @@ app.use(authRouter)
 
 app.get("/", homeController.homeScreen)
 //app.post("/", homeController.homeScreen)
-app.post("/addEasyRun", enterEasyRunController.postedEasyRunForm)
-app.post("/addWorkout", enterWorkoutController.postedWorkoutForm)
-app.post("/addCrossTrain", enterCrossTrainController.postedCrossTrainForm)
+app.post("/addEasyRun", easyRunController.postedEasyRunForm)
+app.post("/addWorkout", workoutController.postedWorkoutForm)
+app.post("/addCrossTrain", crossTrainController.postedCrossTrainForm)
 app.post("/addScheduleInput", scheduleInputController.addScheduleInput)
 
-app.get("/easyRun", enterEasyRunController.easyRunPage)
-app.get("/workout", enterWorkoutController.workoutPage)
-app.get("/crossTrain", enterCrossTrainController.crossTrainPage)
+app.get("/easyRun", easyRunController.easyRunPage)
+app.get("/workout", workoutController.workoutPage)
+app.get("/crossTrain", crossTrainController.crossTrainPage)
 app.get("/showLog/:id", homeController.showLog)
 app.get("/inputSchedule", scheduleInputController.inputSchedule)
+app.get("/addTemplate", templateController.addTemplate)
 
 app.use(errorController.pageNotFoundError)
 app.use(errorController.internalServerError)

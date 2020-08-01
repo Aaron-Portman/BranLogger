@@ -1,5 +1,6 @@
 "use strict"
 const Workout = require("../models/Workout")
+const homeController = require("./homeController")
 
 exports.workoutPage = (req, res) => {
     res.render("workout")
@@ -7,7 +8,7 @@ exports.workoutPage = (req, res) => {
 
 exports.postedWorkoutForm = async (req,res) => {
     let grade = req.body.grade
-    let gradeColor = homecontroller.setGradeColor(grade)
+    let gradeColor = homeController.setGradeColor(grade)
     try{
         let d = new Date(req.body.date)
         let newWorkout = new Workout({

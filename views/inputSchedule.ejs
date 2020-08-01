@@ -16,13 +16,13 @@
     <% } %>
     
     <h1>Athlete List:</h1>
-    <ul id="athletes">
+    <div id="athletes">
         <% athleteList.forEach(athlete => { %>
+            <div> <input type="checkbox" style="margin-right: 5px;" name="selectedUsersToApply[]" class="athletes"><%= athlete.googlename%></div>
             <input type="text" class="userIds" hidden name="userIDs[]" value="<%=athlete.id%>">
             <input type="number" class="selected hidden name="selected[]" value="0">
-            <li><%=athlete.googlename%> <input type="checkbox" name="selectedUsersToApply[]" class="athletes"></li>
         <%}); %>
-    </ul>
+    </div>
     <button id="submit" type="submit">Submit</button>
     
 
@@ -94,7 +94,7 @@
         //console.log(process.env.SERVER_URL)
         axios.post("/addScheduleInput", data)
         .then((response) => {
-            console.log("data sent")
+           alert("The schedule has been applied to the selected athletes!")
         }).catch(function (error) {
             console.log(error)
         });

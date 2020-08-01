@@ -4,6 +4,8 @@ const EasyRun = require("../models/EasyRun")
 const WeekToUser = require("../models/WeekToUser")
 const Week = require("../models/Week")
 const Day = require("../models/Day")
+const homeController = require("./homeController")
+
 
 exports.easyRunPage = async (req, res) => {
     console.log("entered get")

@@ -1,5 +1,9 @@
 "use strict"
 const User = require("../models/User")
+const Workout = require("../models/Workout")
+const EasyRun = require("../models/EasyRun")
+const CrossTrain = require("../models/CrossTrain")
+
 
 exports.homeScreen = async (req, res, next) => {
     try {
@@ -25,7 +29,8 @@ exports.showLog = async (req,res) => {
     }
 }
 
-function setGradeColor(grade) {
+exports.setGradeColor = (grade) => {
+    let gradeColor
     if (grade == "Excellent") {
         gradeColor = "#309143"
     } else if (grade == "Very Good") {
@@ -43,4 +48,5 @@ function setGradeColor(grade) {
     }
     return gradeColor
 }
+
 

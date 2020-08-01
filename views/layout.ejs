@@ -7,8 +7,8 @@
     <title style="color: black;">BranLogger 1.0</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="./css/form.css">
-    <link rel="stylesheet" href="./css/inputSchedule.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/inputSchedule.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
     
         integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -52,6 +52,12 @@
             <% if (user.role == 1 || user.role == 2) { %>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="/inputSchedule">Input Athlete Schedule</a>
+            </li>
+            <li class="dropdown">
+                <a class="nav-link" data-toggle="tab" href="/">Templates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="/addTemplate">Add Template</a>
             </li>
             <% } %>
         </ul>

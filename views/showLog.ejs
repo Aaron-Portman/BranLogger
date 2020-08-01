@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<h1 style="text-align: center;">Log</h1>
+<form class="form-inline" id="inputScheduleForm" action="/addScheduleInput" method="POST">
+    <div class="inputScheduleRow">
+        <div>Date</div>
+        <div>Mileage</div>
+        <div>Workout/Extras</div>
+        <div>Exercises</div>
+        <div>Comments</div>
+    </div>
+    <% for (var i = 0; i < 7; i++) { %>
+        <div class="inputScheduleRow">
+            <input type="date" class="form-control inputScheduleDate date" name="date[]" placeholder="Date" readonly>
+            <input type="number" value="6" class="form-control textAlignCenter mileage" name="mileage[]" placeholder="Mileage" readonly>
+            <input type="text" value="Strides" class="form-control textAlignCenter workoutOrExtra" name="workoutOrExtra[]" placeholder="Workout/Extras" readonly>
+            <input type="text" value="Core" class="form-control exercise" name="exercise[]" placeholder="Exercises" readonly>
+            <input type="text" value = "comment" class="form-control" placeholder="Comments">
+        </div>
+    <% } %>
+</form>
 <h1>Workouts:</h1>
 <% workouts.forEach(workout => { %>
 <div style="background-color: <%= workout.gradeColor %>; padding:3%; margin:10px">

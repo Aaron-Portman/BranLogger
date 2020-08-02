@@ -33,6 +33,18 @@ app.use(
     })
 );
 
+//trying to force login
+// app.use((req, res, next) => {
+//     if(req.originalUrl === "/"){
+//         next()
+//     }
+//     if (req._userId === null || req._userId === undefined || req._userId === "") {
+//         res.redirect("/login")
+//     }
+//     next()
+    
+// });
+
 app.use(express.json())
 app.use(layouts)
 app.use(express.static("public"))
@@ -44,6 +56,8 @@ app.post("/addEasyRun", easyRunController.postedEasyRunForm)
 app.post("/addWorkout", workoutController.postedWorkoutForm)
 app.post("/addCrossTrain", crossTrainController.postedCrossTrainForm)
 app.post("/addScheduleInput", scheduleInputController.addScheduleInput)
+app.post("/addTemplate", templateController.addTemplate)
+app.post("/getTemplate", templateController.getTemplate)
 
 app.get("/easyRun", easyRunController.easyRunPage)
 app.get("/workout", workoutController.workoutPage)
@@ -52,8 +66,13 @@ app.get("/showLog/:id", homeController.showLog)
 app.get("/inputSchedule", scheduleInputController.inputSchedule)
 app.get("/addTemplate", templateController.addTemplatePage)
 
-app.use(errorController.pageNotFoundError)
-app.use(errorController.internalServerError)
+
+//app.get("/viewTemplate", templateController.viewTemplatePage)
+
+
+
+// app.use(errorController.pageNotFoundError)
+// app.use(errorController.internalServerError)
 
 app.listen(app.get("port"), () => {
     console.log(`Server running at http://localhost:${app.get("port")}`);

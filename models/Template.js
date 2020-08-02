@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const templateSchema = Schema({
     name: String,
-    weekId: Number,
+    weekId: ObjectId,
     dayOrder: [Number],
 });
 

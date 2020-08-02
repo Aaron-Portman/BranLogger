@@ -1,7 +1,7 @@
 const Day = require("../models/Day")
 const Week = require("../models/Week")
+const Template = require("../models/Template")
 exports.addWeek = async (mileages, workoutOrExtras, exercises) => {
-    console.log("Made it to addScheduleInput")
     try{
 
         for (let i = 0; i < mileages.length; i++) {
@@ -64,3 +64,35 @@ exports.addWeek = async (mileages, workoutOrExtras, exercises) => {
         console.log(e)
     }
 }
+exports.getWeek = async (weekId, dayOrder) => {
+    let week = await Week.findOne({
+        _id: weekId
+    })
+
+    days = []
+    week.dayIds.sort()
+    for(let i = 0; i < week.dayIds.length; i++){
+        let day = await Day.findOne({
+            _id: week.dayIds[i]
+        })
+        days.push(day)
+    }
+    let mileages = []
+    let workoutOrExtras = []
+    let exercises = []
+
+    for(let i = 0; i < dayOrder.length; i++){
+        let dayIndex = dayOrder[i]
+        let day = days[dayIndex]
+        mileages.push(day.mileage)
+        workoutOrExtras.push(day.workoutOrExtras)
+        exercises.push(day.exercises)
+    }
+    return {
+        mileages,
+        workoutOrExtras,
+        exercises
+    }
+}
+
+

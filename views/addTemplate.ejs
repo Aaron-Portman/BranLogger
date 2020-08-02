@@ -1,6 +1,15 @@
-<form class="form-inline" id="inputScheduleForm" action="/addScheduleInput" method="POST">
+<select id="selectedWeek">
+<option>Select</option>
+<% for (var i = 0; i < templates.length; i++){ %>
+    <option value="<%=templates[i].id%>">
+        <%=templates[i].name %>
+    </option>
+<% } %>
+</select>
+
+<form class="form-inline" id="inputScheduleForm">
     <div>
-        <input id="templateName" type="text" name="name" placeholder="Name of Template">
+        <input id="templateName" type="text" id="templateName" name="name" placeholder="Name of Template">
     </div>
     <div class="inputScheduleRow">
         <div>Date</div>
@@ -12,48 +21,73 @@
     <% for (var i = 0; i < 7; i++) { %>
         <div class="inputScheduleRow">
             <input type="text" class="form-control inputScheduleDate date" value="<%=days[i]%>" name="date[]" readonly>
-            <input type="number" value="6" class="form-control textAlignCenter mileage" name="mileage[]" placeholder="Mileage">
-            <input type="text" value="Strides" class="form-control textAlignCenter workoutOrExtra" name="workoutOrExtra[]"
+            <input type="number" class="form-control textAlignCenter mileage" name="mileage[]" placeholder="Mileage">
+            <input type="text" class="form-control textAlignCenter workoutOrExtra" name="workoutOrExtra[]"
                 placeholder="Workout/Extras">
-            <input type="text" value="Core" class="form-control exercise" name="exercise[]" placeholder="Exercises">
+            <input type="text"  class="form-control exercise" name="exercise[]" placeholder="Exercises">
         </div>
     <% } %>
     <button id="submit" type="submit">Submit</button>
-
+</form>
     <script>
+
+        let selectedWeek = document.getElementById("selectedWeek")
+        selectedWeek.addEventListener("change", (e)=>{
+            e.preventDefault()
+            let templateId = selectedWeek.value
+            axios.post("/getTemplate", {templateId})
+            .then((response) => {
+                let week = response.data.week
+                let templateName = response.data.templateName
+                console.log(response.data)
+                console.log(week)
+                let mileages = document.getElementsByClassName("mileage")
+                let workoutOrExtras = document.getElementsByClassName("workoutOrExtra")
+                let exercises = document.getElementsByClassName("exercise")
+                let name = document.getElementById("templateName")
+                name.value = templateName
+                for(let i = 0; i < mileages.length; i++){
+                    mileages[i].value = week.mileages[i]
+                    workoutOrExtras[i].value = week.workoutOrExtras[i]
+                    exercises[i].value = week.exercises[i]
+                }
+            })
+        })
+
+
         let submitButton = document.getElementById("submit")
         submitButton.addEventListener("click", (e)=>{ 
-        e.preventDefault()
-        let dates = document.getElementsByClassName("date")
-        let mileages = document.getElementsByClassName("mileage")
-        let workoutOrExtras = document.getElementsByClassName("workoutOrExtra")
-        let exercises = document.getElementsByClassName("exercise")
-        let templateName = document.getElementById("templateName")
-        let dateArr = []
-        let mileageArr = []
-        let workoutOrExtraArr = []
-        let exerciseArr = []
-        for(let i = 0; i < dates.length; i++){
-            dateArr.push(dates[i].value)
-            mileageArr.push(mileages[i].value)
-            workoutOrExtraArr.push(workoutOrExtras[i].value)
-            exerciseArr.push(exercises[i].value)
-        }
+            e.preventDefault()
+            let dates = document.getElementsByClassName("date")
+            let mileages = document.getElementsByClassName("mileage")
+            let workoutOrExtras = document.getElementsByClassName("workoutOrExtra")
+            let exercises = document.getElementsByClassName("exercise")
+            let templateName = document.getElementById("templateName")
+            let dateArr = []
+            let mileageArr = []
+            let workoutOrExtraArr = []
+            let exerciseArr = []
+            for(let i = 0; i < dates.length; i++){
+                dateArr.push(dates[i].value)
+                mileageArr.push(mileages[i].value)
+                workoutOrExtraArr.push(workoutOrExtras[i].value)
+                exerciseArr.push(exercises[i].value)
+            }
 
-        let data = {
-            dates: dateArr,
-            mileages: mileageArr,
-            workoutOrExtras: workoutOrExtraArr,
-            exercises: exerciseArr,
-            name: templateName,
-        }
-        //console.log(process.env.SERVER_URL)
-        axios.post("/addTemplate", data)
-        .then((response) => {
-           alert("Template Added!")
-        }).catch(function (error) {
-            console.log(error)
-        });
-    })
+            let data = {
+                mileages: mileageArr,
+                workoutOrExtras: workoutOrExtraArr,
+                exercises: exerciseArr,
+                name: templateName,
+            }
+
+            //console.log(process.env.SERVER_URL)
+            axios.post("/addTemplate", data)
+            .then((response) => {
+            alert("Template Added!")
+            }).catch(function (error) {
+                console.log(error)
+            });
+        })
     </script>
 

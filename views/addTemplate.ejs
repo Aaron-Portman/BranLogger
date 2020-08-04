@@ -44,8 +44,7 @@
                 let mileages = document.getElementsByClassName("mileage")
                 let workoutOrExtras = document.getElementsByClassName("workoutOrExtra")
                 let exercises = document.getElementsByClassName("exercise")
-                let name = document.getElementById("templateName")
-                name.value = templateName
+                
                 for(let i = 0; i < mileages.length; i++){
                     mileages[i].value = week.mileages[i]
                     workoutOrExtras[i].value = week.workoutOrExtras[i]
@@ -62,13 +61,12 @@
             let mileages = document.getElementsByClassName("mileage")
             let workoutOrExtras = document.getElementsByClassName("workoutOrExtra")
             let exercises = document.getElementsByClassName("exercise")
-            let templateName = document.getElementById("templateName")
-            let dateArr = []
+            let name = document.getElementById("templateName")
+            name = name.value            
             let mileageArr = []
             let workoutOrExtraArr = []
             let exerciseArr = []
             for(let i = 0; i < dates.length; i++){
-                dateArr.push(dates[i].value)
                 mileageArr.push(mileages[i].value)
                 workoutOrExtraArr.push(workoutOrExtras[i].value)
                 exerciseArr.push(exercises[i].value)
@@ -78,7 +76,7 @@
                 mileages: mileageArr,
                 workoutOrExtras: workoutOrExtraArr,
                 exercises: exerciseArr,
-                name: templateName,
+                name: name,
             }
 
             //console.log(process.env.SERVER_URL)

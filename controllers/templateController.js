@@ -24,6 +24,7 @@ exports.addTemplate = async (req,res) => {
             order.push(dayIdIndex)
         }
         console.log("about to make template")
+        console.log("name" , req.body.name)
         let template = new Template({
             name: req.body.name,
             weekId: week.id,

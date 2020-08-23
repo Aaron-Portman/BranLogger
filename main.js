@@ -18,7 +18,7 @@ const express = require("express"),
 
 const mongoose = require("mongoose")
 mongoose.connect(
-    'mongodb://localhost/branlogger',
+    process.env.MONGO_URI,
     {useNewUrlParser:true, useUnifiedTopology: true
 })
 

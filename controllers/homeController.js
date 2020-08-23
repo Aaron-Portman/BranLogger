@@ -1,11 +1,12 @@
 "use strict"
-const User = require("../models/User")
+
 const Workout = require("../models/Workout")
 const EasyRun = require("../models/EasyRun")
 const CrossTrain = require("../models/CrossTrain")
+const User = require("../models/User")
 
-
-exports.homeScreen = async (req, res, next) => {
+// GET
+exports.homeScreen = async (req, res) => {
     try {
         if (req.user !== undefined && req.user !== null) {
             res.locals.teamMembers = await User.find()
@@ -18,6 +19,7 @@ exports.homeScreen = async (req, res, next) => {
     }
 }
 
+// GET
 exports.showLog = async (req,res) => {
     try {
         res.locals.workouts = await Workout.find({userId: req.params.id})

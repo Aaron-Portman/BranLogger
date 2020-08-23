@@ -27,7 +27,7 @@ module.exports = function(passport) {
 
         clientID        : configAuth.googleAuth.clientID,
         clientSecret    : configAuth.googleAuth.clientSecret,
-        callbackURL     : process.env.SERVER_URL + "login/authorized" 
+        callbackURL     : "/login/authorized" 
 
     },
     function(token, refreshToken, profile, done) {
